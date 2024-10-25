@@ -1,5 +1,5 @@
 data class Header
 (
-	nonce: Long,
-	blockHash: String,
+	nonce:		Long,
+	blockHash:	String,
 )
