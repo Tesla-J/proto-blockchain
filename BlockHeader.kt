@@ -1,4 +1,4 @@
-data class Header
+data class BlockHeader
 (
 	nonce:		Long,
 	blockHash:	String,
