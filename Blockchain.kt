@@ -17,7 +17,7 @@ class Blockchain(dificulty: Int = 4)
 		val data:	BlockData
 
 		data = Data("Thoumbs", "-0")
-		payload = BlockPayload(0, getTimestamp, data, "")
+		payload = BlockPayload(0, getTimestamp(), data, "")
 		header = BlockHeader(0,sha256(payload))
 	}
 
