@@ -6,7 +6,7 @@ class Blockchain(dificulty: Int = 4)
 	init
 	{
 		chain = mutableListOf()
-		powPrefix = "42"
+		powPrefix = "0420"
 		chain.add(createGenesisBlock())
 	}
 
@@ -40,7 +40,7 @@ class Blockchain(dificulty: Int = 4)
 	}
 
 	fun isValidHash(hash: String, nonce: Long): Boolean =
-		sha256(hash + nonce).substring(0,2) == powPrefix
+		sha256(hash + nonce).startsWith(powPrefix)
 
 	fun mineBlock(payload: BlockPayload): Block
 	{

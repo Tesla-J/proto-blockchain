@@ -10,7 +10,7 @@ fun main()
 	println("Marcos blockchain, YOUKOSO!")
 	blockchain = Blockchain(42)
 
-	for (blocks in 0 until 42_000)
+	for (blocks in 0 until 42)
 	{
 		data = BlockData(randomString(Random.nextInt(1,42)), randomString(10))
 		payload = blockchain.createBlock(data)
