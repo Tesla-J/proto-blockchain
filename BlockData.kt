@@ -1,5 +1,5 @@
 data class BlockData
 (
-	name:		String,
-	birthDate:	String,
+	val name:		String,
+	val birthDate:	String,
 )

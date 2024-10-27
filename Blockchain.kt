@@ -16,9 +16,10 @@ class Blockchain(dificulty: Int = 4)
 		val payload:	BlockPayload
 		val data:	BlockData
 
-		data = Data("Thoumbs", "-0")
+		data = BlockData("Thoumbs", "-0")
 		payload = BlockPayload(0, getTimestamp(), data, "")
-		header = BlockHeader(0,sha256(payload))
+		header = BlockHeader(0,sha256(payload.toString()))
+		return (Block(header, payload))
 	}
 
 	private fun getLatestBlock(): Block =
@@ -32,14 +33,14 @@ class Blockchain(dificulty: Int = 4)
 		val latestBlock:	Block
 		val payload:		BlockPayload
 
-		latestBlock = getLatestBLock()
+		latestBlock = getLatestBlock()
 		payload = BlockPayload(latestBlock.payload.sequence + 1, getTimestamp(), data, latestBlock.header.blockHash)
 		println("Block created: $payload")
 		return (payload)
 	}
 
 	fun isValidHash(hash: String, nonce: Long): Boolean =
-		sha256(payloadHash + nonce).substring(0,2) == powPrefix
+		sha256(hash + nonce).substring(0,2) == powPrefix
 
 	fun mineBlock(payload: BlockPayload): Block
 	{
@@ -49,8 +50,8 @@ class Blockchain(dificulty: Int = 4)
 		var hashPow:		String
 		val header:		BlockHeader
 
-		startTime = getTimeStamp()
-		payloadHash = sha256(payload)
+		startTime = getTimestamp()
+		payloadHash = sha256(payload.toString())
 		nonce = 0;
 		while (nonce <= Long.MAX_VALUE)
 		{
@@ -58,7 +59,7 @@ class Blockchain(dificulty: Int = 4)
 				break
 			nonce++;
 		}
-		println("Time minerating: ${(getTimeStamp() - startTime) / 1000} seconds")
+		println("Time minerating: ${(getTimestamp() - startTime) / 1000} seconds")
 		println("Sequence: ${payload.sequence}")
 		println("Hash: ${payloadHash.substring(0,43)}")
 		println("Tries: $nonce")
@@ -68,7 +69,7 @@ class Blockchain(dificulty: Int = 4)
 
 	fun isValidBlock(block: Block): Boolean
 	{
-		if (block.payload.previousHash == getLatestBlock().header.blockHash)
+		if (block.payload.previousHash != getLatestBlock().header.blockHash)
 		{
 			println("Invalid previous block hash!")
 			return (false)
@@ -86,7 +87,7 @@ class Blockchain(dificulty: Int = 4)
 		if (isValidBlock(block))
 		{
 			chain.add(block)
-			println("Block added to chain")
+			println("Block added to chain ${sha256(block.header.blockHash + block.header.nonce)}")
 		}
 		else
 			println("Block not added to chain")

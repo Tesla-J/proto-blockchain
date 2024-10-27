@@ -1,5 +1,5 @@
 data class BlockHeader
 (
-	nonce:		Long,
-	blockHash:	String,
+	val nonce:		Long,
+	val blockHash:	String,
 )

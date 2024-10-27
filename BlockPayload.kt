@@ -1,7 +1,7 @@
 data class BlockPayload
 (
-	sequence:	Long,
-	timestamp:	Long,
-	data:		Data,
-	previousHash:	String,
+	val sequence:	Long,
+	val timestamp:	Long,
+	val data:		BlockData,
+	val previousHash:	String,
 )
